@@ -13,40 +13,29 @@ const rollDiceBtn = document.querySelector('.btn--roll');
 const holdScoreBtn = document.querySelector('.btn--hold');
 
 // Scores
-let scores = [0, 0]; // index: 0 = player 1 score & index: 1 = player 2 score
-let currentScore = 0;
-let activePlayer = 0;
+let scores,
+    currentScore,
+    activePlayer = 0;
 
 // Function: Reset Scores & start new game
 const startGame = () => {
-    // Remove winner class
-    if (
-        document
-            .querySelector(`.player--${activePlayer}`)
-            .classList.contains('player--winner')
-    ) {
-        document
-            .querySelector(`.player--${activePlayer}`)
-            .classList.remove('player--winner');
-    }
-
     // Reset scores to 0
     scores = [0, 0];
     currentScore = 0;
     activePlayer = 0;
-
     // Clear scores in UI
-    p1ScoreEl.textContent = scores[0];
-    p1CurrentScoreEl.textContent = currentScore;
-    p2ScoreEl.textContent = scores[1];
-    p2CurrentScoreEl.textContent = currentScore;
-
+    p1ScoreEl.textContent = 0;
+    p1CurrentScoreEl.textContent = 0;
+    p2ScoreEl.textContent = 0;
+    p2CurrentScoreEl.textContent = 0;
+    // Remove winner class
+    p1El.classList.remove('player--winner');
+    p2El.classList.remove('player--winner');
     // Hide dice
     diceEl.classList.add('hidden');
-
     // Switch active player to player1 in UI
-    if (p2El.classList.contains('player--active')) switchActivePlayer();
-
+    p1El.classList.add('player--active');
+    p2El.classList.remove('player--active');
     // Enable buttons
     if (rollDiceBtn.classList.contains('disabled')) toggleButtons();
 };
